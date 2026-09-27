@@ -1,0 +1,14 @@
+# Le contexte de build est la racine du dépôt : voir docker/Dockerfile.service
+# et le champ `context: ..` de docker/docker-compose.service.yml.
+#
+# Le Dockerfile ne copie que requirements.txt et app/. Tout le reste est exclu
+# par une liste blanche : tests/, data/, docker/ et les secrets ne suivent pas
+# dans l'image, y compris lors d'un build local.
+*
+!requirements.txt
+!app/
+
+# Garde-fous : ces motifs sont ignorés même si la liste blanche change.
+app/**/__pycache__/
+app/**/*.py[cod]
+app/**/*.pyo

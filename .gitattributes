@@ -1,0 +1,46 @@
+# Normalise les fins de ligne en LF dans le dépôt, puis en CRLF à la copie
+# de travail sous Windows. Évite que les accents des fichiers PowerShell
+# soient corrompus selon la configuration core.autocrlf globale.
+* text=auto eol=lf
+
+# PowerShell : CRLF est la convention sur Windows.
+*.ps1 text eol=crlf
+*.psd1 text eol=crlf
+*.psm1 text eol=crlf
+
+# Fichiers explicitement textuels.
+*.py   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.cfg  text eol=lf
+*.toml text eol=lf
+Dockerfile text eol=lf
+
+# Images.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.svg  text eol=lf
+
+# Audio.
+*.mp3  binary
+*.mp4  binary
+*.m4a  binary
+*.wav  binary
+*.ogg  binary
+*.opus binary
+*.webm binary
+*.flac binary
+
+# Binaires.
+*.so        binary
+*.dll       binary
+*.exe       binary
+*.pyd       binary
+*.safetensors binary
+*.bin       binary

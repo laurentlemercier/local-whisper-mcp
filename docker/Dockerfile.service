@@ -1,0 +1,24 @@
+FROM python:3.11-slim@sha256:f9fa7f851e38bfb19c9de3afbc4b86ae7176ea7aaf94535c31df5458d5849457
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app/ ./app/
+
+ENV DATA_DIR=/data \
+    HOST=0.0.0.0 \
+    PORT=8000 \
+    WHISPER_DEVICE=cpu \
+    WHISPER_COMPUTE_TYPE=int8 \
+    MODEL=small \
+    LANGUAGE=fr
+
+EXPOSE 8000
+
+ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

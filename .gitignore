@@ -1,0 +1,42 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Secrets et configuration locale ---
+# L'application ne charge pas de fichier .env : ces variables doivent être
+# définies dans l'environnement du processus. Le fichier reste utile comme
+# référence et n'est jamais versionné.
+.env
+
+# --- Données d'exécution ---
+# Entrées audio téléchargées et état des jobs. Seuls les .gitkeep sont suivis.
+data/input/*
+data/jobs/*
+!data/input/.gitkeep
+!data/jobs/.gitkeep
+
+# --- Artefacts du système ---
+# PowerShell écrit ModuleAnalysisCache dans le dossier courant.
+Microsoft/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# --- Modèles et caches ---
+models/
+*.tmp
+
+# --- Journaux ---
+*.log
+
+# --- Éditeurs ---
+.vscode/
+.idea/
+*.swp
+*.swo

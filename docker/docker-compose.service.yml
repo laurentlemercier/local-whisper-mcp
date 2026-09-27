@@ -1,0 +1,25 @@
+services:
+  whisper-service:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.service
+    container_name: whisper-service
+    environment:
+      - DATA_DIR=/data
+      - HOST=0.0.0.0
+      - PORT=8000
+      - WHISPER_DEVICE=cpu
+      - WHISPER_COMPUTE_TYPE=int8
+      - MODEL=${MODEL:-small}
+      - LANGUAGE=${LANGUAGE:-fr}
+      - MAX_INPUT_SIZE=${MAX_INPUT_SIZE:-524288000}
+    volumes:
+      - ${DATA_PATH}:/data
+      - ${MODELS_PATH}:/root/.cache/huggingface
+    restart: unless-stopped
+    user: "${CURRENT_UID}:${CURRENT_GID}"
+    ports:
+      - "8000:8000"
+
+volumes:
+  whisper_models:
